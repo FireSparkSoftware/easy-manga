@@ -37,7 +37,26 @@ class Controller extends PageManager {
 
         } else {
 
-            $this->sendList( MangaLister::listMangas() );
+            $mangaList = MangaLister::listMangas();
+
+            if ( $mangaList == null ) {
+
+                $this->setAnswer( "Not found.", false, 404 );
+
+            } else {
+
+                $list = array();
+    
+                foreach ( $mangaList as $manga ) {
+    
+                    $detail = MangaLister::getMangaDetails( $manga );
+                    $list[ $manga ] = ($detail) ? $detail : "No detail." ;
+    
+                }
+    
+                $this->setAnswer( $list );
+                
+            }
 
         }
 
