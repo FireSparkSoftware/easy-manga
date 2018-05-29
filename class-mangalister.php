@@ -67,9 +67,11 @@ class MangaLister {
 
         $validPath = self::validPath( CONTENT_DIR . $manga );
 
-        if ( $manga && $validPath ) {
+        $file = $validPath . DIRECTORY_SEPARATOR . DETAILS_JSON_FILE;
+
+        if ( $manga && $validPath && is_file( $file ) ) {
         
-            return json_decode( file_get_contents( $validPath . DIRECTORY_SEPARATOR . DETAILS_JSON_FILE ) );
+            return json_decode( file_get_contents( $file ) );
         
         } else {
 
