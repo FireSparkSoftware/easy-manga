@@ -4,6 +4,8 @@ include "class-mangalister.php";
 
 class Controller extends PageManager {
 
+    const notFoundMsg = "Not found.";
+
     private $manga = null, $episode = null, $page = null;
 
     public function selam(){
@@ -18,8 +20,14 @@ class Controller extends PageManager {
         $this->manga = trim( $manga ); $this->episode = trim( $episode ); $this->page = trim( $page );
 
         if ( $this->episode && $this->manga ) {
-    
-            $this->sendList( MangaLister::listPages( $this->manga, $this->episode ) );
+
+            $list = MangaLister::listPages( $this->manga, $this->episode );
+
+            if ( $list )
+                $this->setAnswer( $list );
+            
+            else
+                $this->setAnswer( notFoundMsg, false, 404 );
 
         } elseif ( $this->manga ) {
 
@@ -29,7 +37,7 @@ class Controller extends PageManager {
 
             if ( $details == null && $list == null ) 
 
-                $this->setAnswer( "Not found.", false, 404 );
+                $this->setAnswer( notFoundMsg, false, 404 );
 
             else
 
@@ -41,7 +49,7 @@ class Controller extends PageManager {
 
             if ( $mangaList == null ) {
 
-                $this->setAnswer( "Not found.", false, 404 );
+                $this->setAnswer( notFoundMsg, false, 404 );
 
             } else {
 
@@ -59,16 +67,6 @@ class Controller extends PageManager {
             }
 
         }
-
-    }
-
-    public function sendList( $list = null ){
-
-        if ( $list )
-            $this->setAnswer( $list );
-        
-        else
-            $this->setAnswer( "Not found.", false, 404 );
 
     }
 
