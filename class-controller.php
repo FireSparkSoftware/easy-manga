@@ -17,11 +17,7 @@ class Controller extends PageManager {
 
         $this->manga = trim( $manga ); $this->episode = trim( $episode ); $this->page = trim( $page );
 
-        if ( $this->page && $this->episode && $this->manga ) {
-
-            
-
-        } elseif ( $this->episode && $this->manga ) {
+        if ( $this->episode && $this->manga ) {
     
             $this->sendList( MangaLister::listPages( $this->manga, $this->episode ) );
 
