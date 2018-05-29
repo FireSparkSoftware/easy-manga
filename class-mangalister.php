@@ -2,7 +2,7 @@
 
 class MangaLister {
 
-    const CONTENT_DIR = "content/";
+    const CONTENT_DIR = "content" . DIRECTORY_SEPARATOR;
 
     public static function listMangas() {
 
@@ -10,11 +10,11 @@ class MangaLister {
 
     }
 
-    public static function listEpisodes( $mangaName ) {
+    public static function listEpisodes( $manga ) {
 
-        $validPath = self::validPath( self::CONTENT_DIR . $mangaName );
+        $validPath = self::validPath( self::CONTENT_DIR . $manga );
 
-        if ( $mangaName && $validPath ) {
+        if ( $manga && $validPath ) {
         
             return self::deleteDots( scandir( $validPath ) );
         
@@ -26,9 +26,25 @@ class MangaLister {
 
     }
 
+    public static function listPages( $manga, $episode ) {
+
+        $validPath = self::validPath( self::CONTENT_DIR . $manga . DIRECTORY_SEPARATOR . $episode );
+
+        if ( $manga && $episode && $validPath ) {
+
+            return self::deleteDots( scandir( $validPath ) );
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
     private static function deleteDots( $dirList = array() ) {
 
-        return array_diff( $dirList, array( ".", ".." ) );
+        return array_values( array_diff( $dirList, array( ".", ".." ) ) );
 
     }
 
