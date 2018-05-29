@@ -23,11 +23,21 @@ class Controller extends PageManager {
 
         } elseif ( $this->manga ) {
 
-            $this->sendList( MangaLister::listEpisodes( $this->manga ) );
+            $details = MangaLister::getMangaDetails( $this->manga );
+
+            $list = MangaLister::listEpisodes( $this->manga );
+
+            if ( $details == null && $list == null ) 
+
+                $this->setAnswer( "Not found.", false, 404 );
+
+            else
+
+                $this->setAnswer( array( "details" => $details, "episodes" => $list ) );
 
         } else {
 
-            $this->setAnswer( MangaLister::listMangas() );
+            $this->sendList( MangaLister::listMangas() );
 
         }
 

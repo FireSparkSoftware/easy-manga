@@ -63,4 +63,20 @@ class MangaLister {
 
     }
 
+    public static function getMangaDetails( $manga ) {
+
+        $validPath = self::validPath( CONTENT_DIR . $manga );
+
+        if ( $manga && $validPath ) {
+        
+            return json_decode( file_get_contents( $validPath . DIRECTORY_SEPARATOR . DETAILS_JSON_FILE ) );
+        
+        } else {
+
+            return null;
+
+        }
+
+    }
+
 }
