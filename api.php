@@ -1,7 +1,7 @@
 <?php
 
 define( "CONTENT_DIR", "content" . DIRECTORY_SEPARATOR );
-define( "DETAILS_JSON_NAME", "details.json" );
+define( "DETAILS_JSON_FILE", "details.json" );
 
 include_once "class-controller.php";
 
