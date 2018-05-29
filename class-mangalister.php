@@ -42,7 +42,7 @@ class MangaLister {
 
     private static function deleteDots( $dirList = array() ) {
 
-        return array_values( array_diff( $dirList, array( ".", ".." ) ) );
+        return array_values( array_diff( $dirList, array( ".", "..", DETAILS_JSON_NAME ) ) );
 
     }
 
