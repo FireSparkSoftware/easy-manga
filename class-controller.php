@@ -8,12 +8,6 @@ class Controller extends PageManager {
 
     private $manga = null, $episode = null, $page = null;
 
-    public function selam(){
-
-        $this->setAnswer("selam", true, 201);
-
-    }
-
     public function __construct( $manga = null, $episode = null, $page = null ) {
         parent::__construct();
 
