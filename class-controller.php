@@ -31,7 +31,7 @@ class Controller extends PageManager {
                 $this->setAnswer( $list );
             
             else
-                $this->setAnswer( notFoundMsg, false, 404 );
+                $this->setAnswer( self::notFoundMsg, false, 404 );
     
         } elseif ( $this->manga ) {
     
@@ -41,7 +41,7 @@ class Controller extends PageManager {
     
             if ( $details == null && $list == null ) 
     
-                $this->setAnswer( notFoundMsg, false, 404 );
+                $this->setAnswer( self::notFoundMsg, false, 404 );
     
             else
     
@@ -53,7 +53,7 @@ class Controller extends PageManager {
     
             if ( $mangaList == null ) {
     
-                $this->setAnswer( notFoundMsg, false, 404 );
+                $this->setAnswer( self::notFoundMsg, false, 404 );
     
             } else {
     
