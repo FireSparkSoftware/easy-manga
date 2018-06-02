@@ -16,7 +16,13 @@ class MangaLister {
 
     public static function listPages( $manga, $episode ) {
 
-        return self::listDirectory( $manga . DIRECTORY_SEPARATOR . $episode, false );
+        $list = self::listDirectory( $manga . DIRECTORY_SEPARATOR . $episode, false );
+
+        for ( $i=0; $i < count($list); $i++ )
+
+            $list[$i] = self::getFileURL( $manga . "/" . $episode . "/" . $list[$i] );
+
+        return $list;
 
     }
 
@@ -89,6 +95,12 @@ class MangaLister {
             return null;
 
         }
+
+    }
+
+    public static function getFileURL( $file ) {
+
+        return APP_REMOTE_DIR . CONTENT_DIR . "/" . $file;
 
     }
 
