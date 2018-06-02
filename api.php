@@ -1,5 +1,6 @@
 <?php
 
+define( "APP_REMOTE_DIR", "http://" . $_SERVER["HTTP_HOST"] . "/" );
 define( "CONTENT_DIR", "content" . DIRECTORY_SEPARATOR );
 define( "DETAILS_JSON_FILE", "details.json" );
 
