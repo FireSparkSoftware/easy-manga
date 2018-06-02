@@ -22,7 +22,7 @@ class MangaLister {
 
     private static function listDirectory( $directory ) {
 
-        $validPath = self::validPath( CONTENT_DIR . $directory );
+        $validPath = self::validPath( CONTENT_DIR . DIRECTORY_SEPARATOR . $directory );
 
         if ( $validPath ) {
 
@@ -61,7 +61,7 @@ class MangaLister {
 
     public static function getMangaDetails( $manga ) {
 
-        $validPath = self::validPath( CONTENT_DIR . $manga );
+        $validPath = self::validPath( CONTENT_DIR . DIRECTORY_SEPARATOR . $manga );
 
         $file = $validPath . DIRECTORY_SEPARATOR . DETAILS_JSON_FILE;
 

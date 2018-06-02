@@ -20,7 +20,7 @@ class PageManager {
 
         if ( !$this->contentCheck() ) {
 
-            $this->setAnswer( CONTENT_DIR . " directory not found", false, 510 );
+            $this->setAnswer( CONTENT_DIR . DIRECTORY_SEPARATOR . " directory not found", false, 510 );
 
         }
 
