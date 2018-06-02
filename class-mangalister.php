@@ -4,7 +4,7 @@ class MangaLister {
 
     public static function listMangas() {
 
-        return self::deleteDots( scandir( CONTENT_DIR ) );
+        return self::listDirectory();
 
     }
 
@@ -16,23 +16,38 @@ class MangaLister {
 
     public static function listPages( $manga, $episode ) {
 
-        return self::listDirectory( $manga . DIRECTORY_SEPARATOR . $episode );
+        return self::listDirectory( $manga . DIRECTORY_SEPARATOR . $episode, false );
 
     }
 
-    private static function listDirectory( $directory ) {
+    private static function listDirectory( $directory = "", $onlyDir = true ) {
 
         $validPath = self::validPath( CONTENT_DIR . DIRECTORY_SEPARATOR . $directory );
 
         if ( $validPath ) {
 
-            return self::deleteDots( scandir( $validPath ) );
+            $inside = self::deleteDots( scandir( $validPath ) );
 
-        } else {
+            if ( $onlyDir ) {
+
+                $list = array();
+                foreach ($inside as $element) {
+
+                    if ( is_dir($validPath . DIRECTORY_SEPARATOR . $element) )
+
+                        $list[] = $element;
+
+                }
+
+                return $list;
+
+            }
+            
+            return $inside;
+
+        } else
 
             return null;
-
-        }
 
     }
 
