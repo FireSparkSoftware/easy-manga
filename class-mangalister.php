@@ -10,25 +10,21 @@ class MangaLister {
 
     public static function listEpisodes( $manga ) {
 
-        $validPath = self::validPath( CONTENT_DIR . $manga );
-
-        if ( $manga && $validPath ) {
-        
-            return self::deleteDots( scandir( $validPath ) );
-        
-        } else {
-
-            return null;
-
-        }
+        return self::listDirectory( $manga );
 
     }
 
     public static function listPages( $manga, $episode ) {
 
-        $validPath = self::validPath( CONTENT_DIR . $manga . DIRECTORY_SEPARATOR . $episode );
+        return self::listDirectory( $manga . DIRECTORY_SEPARATOR . $episode );
 
-        if ( $manga && $episode && $validPath ) {
+    }
+
+    private static function listDirectory( $directory ) {
+
+        $validPath = self::validPath( CONTENT_DIR . $directory );
+
+        if ( $validPath ) {
 
             return self::deleteDots( scandir( $validPath ) );
 
