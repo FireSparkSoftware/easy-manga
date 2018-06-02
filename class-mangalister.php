@@ -85,22 +85,58 @@ class MangaLister {
         $validPath = self::validPath( CONTENT_DIR . DIRECTORY_SEPARATOR . $manga );
 
         $file = $validPath . DIRECTORY_SEPARATOR . DETAILS_JSON_FILE;
-
-        if ( $manga && $validPath && is_file( $file ) ) {
         
-            return json_decode( file_get_contents( $file ) );
-        
-        } else {
+        if ( $validPath ) {
 
+            $coverURL = self::getCoverURL( $manga );
+
+            if ( is_file( $file ) ){
+
+                $details = json_decode( file_get_contents( $file ) );
+
+                if ( $coverURL )
+
+                    $details->cover = $coverURL;
+                    
+                return $details;
+
+            } elseif ( $coverURL ){
+
+                return array( "cover" => $coverURL );
+
+            }
+        
             return null;
-
+        
         }
+
+        return null;
 
     }
 
     public static function getFileURL( $file ) {
 
         return APP_REMOTE_DIR . CONTENT_DIR . "/" . $file;
+
+    }
+
+    public static function getCoverURL( $manga ) {
+
+        $list = self::listDirectory( $manga, false );
+
+        foreach ( $list as $element ) {
+            
+            $ext = explode( ".", $element );
+
+            if ( end($ext) == "png" || end($ext) == "jpg" ) {
+
+                return self::getFileURL( $manga . "/" . $element );
+
+            }
+
+        }
+
+        return false;
 
     }
 
