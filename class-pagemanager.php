@@ -3,7 +3,7 @@ include_once "class-answer.php";
 
 class PageManager {
 
-    private $answer;
+    protected $answer;
 
     public function setAnswer( $message = "", $success = true, $responseCode = null ) {
 
@@ -20,8 +20,7 @@ class PageManager {
 
         if ( !$this->contentCheck() ) {
 
-            $this->setAnswer( CONTENT_DIR . " directory not found", false, 500 );
-            exit;
+            $this->setAnswer( CONTENT_DIR . " directory not found", false, 510 );
 
         }
 
